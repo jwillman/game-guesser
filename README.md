@@ -4,6 +4,13 @@ A small game to guess the title of a video game based on it's cover art.
 
 Made with SvelteKit.
 
+## Configuration
+
+Add to environment variables:
+
+- TWITCH_CLIENT_ID
+- TWITCH_CLIENT_SECRET
+
 ## Run dev environment
 
 ```bash

@@ -1,4 +1,4 @@
-import { TEST } from '$env/static/private';
+import { TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET } from '$env/static/private';
 
 export type GameData = {
 	url: string;
@@ -14,7 +14,6 @@ export type GameData = {
 export async function load() {
 	return {
 		url: '/images/Super_Mario_64_box_cover.jpg',
-		title: 'Super Mario 64',
-		test: TEST
+		title: 'Super Mario 64'
 	} as GameData;
 }
