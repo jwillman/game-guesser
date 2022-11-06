@@ -1,3 +1,5 @@
+import { TEST } from '$env/static/private';
+
 export type GameData = {
 	url: string;
 	title: string;
@@ -5,12 +7,14 @@ export type GameData = {
 
 // // Access env variables:
 // export async function post({ request, platform }) {
-// 	const counter = platform.env.COUNTER.idFromName('A');
+// 	const counter = platform.env.TEST;
 // }
 
-export function load() {
+/** @type {import('./$types').PageLoad} */
+export async function load() {
 	return {
 		url: '/images/Super_Mario_64_box_cover.jpg',
-		title: 'Super Mario 64'
+		title: 'Super Mario 64',
+		foo: TEST
 	} as GameData;
 }

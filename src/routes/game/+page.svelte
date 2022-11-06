@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { confetti } from '@neoconfetti/svelte';
-	import type { GameData } from './+page';
+	import type { GameData } from './+page.server';
 	import { pixelateImage } from './pixelateImage';
 	import { onMount } from 'svelte';
 
 	export let data: GameData;
+
+	console.log(data);
 
 	enum GameState {
 		Won,
