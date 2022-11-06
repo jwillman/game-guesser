@@ -1,17 +1,16 @@
 <script>
-	import Header from './Header.svelte';
 	import './styles.css';
+	import github from '$lib/images/github.svg';
 </script>
 
 <div class="app">
-	<Header />
-
 	<main>
 		<slot />
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		You can find the source code here:
+		<a href="https://github.com/jwillman/game-guesser"><img src={github} alt="GitHub" /></a>
 	</footer>
 </div>
 
@@ -35,10 +34,16 @@
 
 	footer {
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
 		align-items: center;
-		padding: 12px;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+	}
+
+	footer img {
+		width: 2em;
+		height: 2em;
+		object-fit: contain;
 	}
 
 	footer a {
