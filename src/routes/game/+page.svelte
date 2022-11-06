@@ -13,9 +13,8 @@
 	}
 	let gameState: GameState = GameState.Undecided;
 
+	// TODO suggest input values / guesses as player types them
 	let guessValue: string;
-	let won: boolean = false;
-	let lost: boolean = false;
 	let pixelationFactor = 25;
 
 	onMount(() => {
@@ -26,8 +25,8 @@
 		});
 	});
 
-	function guess() {
-		if (gameState === GameState.Lost) {
+	function checkGuess() {
+		if (gameState === GameState.Lost || gameState === GameState.Won) {
 			return;
 		}
 
@@ -59,7 +58,7 @@
 	<img id="pixelatedImage" src={data.url} alt="Cover art" />
 	<form on:submit|preventDefault>
 		<input bind:value={guessValue} type="text" placeholder="The name of the game" />
-		<button on:click={guess}>Guess</button>
+		<button on:click={checkGuess}>Guess</button>
 	</form>
 	{#if gameState === GameState.Won}
 		<span id="statusPrompt">You guessed correctly!</span>
@@ -88,7 +87,7 @@
 		align-items: center;
 	}
 
-	#lostPrompt {
+	#statusPrompt {
 		margin-top: 2rem;
 	}
 
