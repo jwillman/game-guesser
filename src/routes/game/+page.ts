@@ -3,9 +3,10 @@ export type GameData = {
 	title: string;
 };
 
-export async function post({ request, platform }) {
-	const counter = platform.env.COUNTER.idFromName('A');
-}
+// // Access env variables:
+// export async function post({ request, platform }) {
+// 	const counter = platform.env.COUNTER.idFromName('A');
+// }
 
 export function load() {
 	return {
