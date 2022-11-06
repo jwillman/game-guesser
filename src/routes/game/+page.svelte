@@ -16,6 +16,7 @@
 	// TODO suggest input values / guesses as player types them
 	let guessValue: string;
 	let pixelationFactor = 25;
+	let guessIsWrong: boolean = false;
 
 	onMount(() => {
 		pixelateImage({
@@ -40,15 +41,22 @@
 		} else {
 			if (pixelationFactor > 1) {
 				pixelationFactor -= 5;
+
+				pixelateImage({
+					originalImage: document.querySelector('#sourceImage'),
+					pixelatedImage: document.querySelector('#pixelatedImage'),
+					pixelationFactor: pixelationFactor
+				});
 			} else {
 				gameState = GameState.Lost;
 			}
+		}
 
-			pixelateImage({
-				originalImage: document.querySelector('#sourceImage'),
-				pixelatedImage: document.querySelector('#pixelatedImage'),
-				pixelationFactor: pixelationFactor
-			});
+		if (gameState === GameState.Undecided) {
+			guessIsWrong = true;
+			setTimeout(() => {
+				guessIsWrong = false;
+			}, 1000);
 		}
 	}
 </script>
@@ -57,7 +65,12 @@
 	<img id="sourceImage" src={data.url} alt="Cover art" style="display:none" />
 	<img id="pixelatedImage" src={data.url} alt="Cover art" />
 	<form on:submit|preventDefault>
-		<input bind:value={guessValue} type="text" placeholder="The name of the game" />
+		<input
+			class:error={guessIsWrong}
+			bind:value={guessValue}
+			type="text"
+			placeholder="The name of the game"
+		/>
 		<button on:click={checkGuess}>Guess</button>
 	</form>
 	{#if gameState === GameState.Won}
@@ -94,5 +107,25 @@
 	input {
 		width: 20rem;
 		margin-top: 2rem;
+	}
+
+	input.error {
+		animation: shake 0.2s ease-in-out 0s 2;
+		box-shadow: 0 0 0.5em red;
+	}
+
+	@keyframes shake {
+		0% {
+			margin-left: 0rem;
+		}
+		25% {
+			margin-left: 0.5rem;
+		}
+		75% {
+			margin-left: -0.5rem;
+		}
+		100% {
+			margin-left: 0rem;
+		}
 	}
 </style>
