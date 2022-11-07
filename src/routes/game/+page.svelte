@@ -22,7 +22,7 @@
 
 	onMount(() => {
 		pixelateImage({
-			originalImage: document.querySelector('#sourceImage'),
+			originalImageUrl: data.url,
 			pixelatedImage: document.querySelector('#pixelatedImage'),
 			pixelationFactor: pixelationFactor
 		});
@@ -35,7 +35,7 @@
 
 		if (guessValue?.trim().toLowerCase() === data.title.trim().toLowerCase()) {
 			pixelateImage({
-				originalImage: document.querySelector('#sourceImage'),
+				originalImageUrl: data.url,
 				pixelatedImage: document.querySelector('#pixelatedImage'),
 				pixelationFactor: 1
 			});
@@ -45,7 +45,7 @@
 				pixelationFactor -= 5;
 
 				pixelateImage({
-					originalImage: document.querySelector('#sourceImage'),
+					originalImageUrl: data.url,
 					pixelatedImage: document.querySelector('#pixelatedImage'),
 					pixelationFactor: pixelationFactor
 				});
@@ -64,8 +64,7 @@
 </script>
 
 <div class="game">
-	<img id="sourceImage" src={data.url} alt="Cover art" style="display:none" />
-	<img id="pixelatedImage" src={data.url} alt="Cover art" />
+	<img id="pixelatedImage" alt="Pixelated cover art" />
 	<form on:submit|preventDefault>
 		<input
 			class:error={guessIsWrong}

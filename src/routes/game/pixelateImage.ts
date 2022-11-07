@@ -1,15 +1,18 @@
 export function pixelateImage({
-	originalImage,
+	originalImageUrl,
 	pixelatedImage,
 	pixelationFactor
 }: {
-	originalImage: HTMLImageElement | null;
+	originalImageUrl: string;
 	pixelatedImage: HTMLImageElement | null;
 	pixelationFactor: number;
 }): void {
-	if (originalImage == null || pixelatedImage == null) {
+	if (originalImageUrl == null || pixelatedImage == null) {
 		return;
 	}
+
+	const sourceImage = new Image();
+	sourceImage.src = originalImageUrl;
 
 	const canvas = document.createElement('canvas');
 	const context = canvas.getContext('2d');
@@ -18,8 +21,8 @@ export function pixelateImage({
 		throw new Error("Couldn't get context");
 	}
 
-	const originalWidth = originalImage.width;
-	const originalHeight = originalImage.height;
+	const originalWidth = sourceImage.width;
+	const originalHeight = sourceImage.height;
 
 	const canvasWidth = originalWidth;
 	const canvasHeight = originalHeight;
@@ -27,7 +30,7 @@ export function pixelateImage({
 	canvas.width = canvasWidth;
 	canvas.height = canvasHeight;
 
-	context.drawImage(originalImage, 0, 0, originalWidth, originalHeight);
+	context.drawImage(sourceImage, 0, 0, originalWidth, originalHeight);
 
 	const originalImageData = context.getImageData(0, 0, originalWidth, originalHeight).data;
 
